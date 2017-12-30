@@ -1,0 +1,36 @@
+#!/bin/sh
+
+MOUNTPOINT="${1:-/srv/app}"
+SENTINEL="${2:-index.php}"
+
+[ -f "$MOUNTPOINT/$SENTINEL" ] && exit 0
+
+# Echo everything to stderr
+exec 1>&2
+
+echo "Whoa there..."
+echo
+
+if [ ! -d "$MOUNTPOINT" ]; then
+	echo "Toolbox expects your app folder mounted at /srv/app."
+	echo
+	echo "You can do that by using the -v parameter in the docker command"
+	echo "line."
+	echo
+	echo "For example, if your app files are in the \"mysite\" directory "
+	echo "in the current directory, you can use the following command "
+	echo "line to mount it at /srv/app:"
+	echo
+	echo "   $ docker run -v ./mysite:/srv/app [...rest of command line...]"
+	echo
+elif [ ! -f "$MOUNTPOINT/$SENTINEL" ]; then
+	echo "Cannot find $SENTINEL in $MOUNTPOINT"
+	echo
+	echo "Are you sure that you mounted the right directory?"
+	echo
+else
+	echo "Something REALLY unexpected happened!"
+	echo
+fi
+
+exit 1

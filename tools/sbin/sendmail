@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# Mock /usr/sbin/sendmail -- just display the message to be sent.
+# This is used to avoid emails to be sent by default.
+#
+# Set variable SENDMAIL_SEND=y to call /usr/sbin/sendmail.orig
+#
+
+# Send everything to stderr
+exec 1>&2
+
+echo "-------------------------------------------"
+if [ "$SENDMAIL_SEND" = "y" ]; then
+	echo "Sending email:"
+	/usr/sbin/ssmtp "$@"
+	rc=$?
+else
+	echo "Simulating email delivery. Set SENDMAIL_SEND to \"y\""
+	echo "to do actual delivery."
+	echo
+	echo "Command line: $0 $@"
+	echo "Message:"
+	cat
+	rc=0
+fi
+echo "-------------------------------------------"
+
+exit $rc
