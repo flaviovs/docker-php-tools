@@ -4,9 +4,9 @@ set -e
 : "${NODE_MAJOR:=6}"
 
 for V in 5.6 7.0 7.1 7.2; do
-	TAG="php-tools:$V"
-	DRUPAL_TAG="drupal-tools:$V"
-	WORDPRESS_TAG="wordpress-tools:$V"
+	TAG="flaviovs/php-tools:$V"
+	DRUPAL_TAG="flaviovs/drupal-tools:$V"
+	WORDPRESS_TAG="flaviovs/wordpress-tools:$V"
 
 	echo "Building $TAG"
 	if ! docker build \
@@ -38,6 +38,6 @@ for V in 5.6 7.0 7.1 7.2; do
 	fi
 done
 
-docker tag "$TAG" php-tools:latest
-docker tag "$DRUPAL_TAG" drupal-tools:latest
-docker tag "$WORDPRESS_TAG" wordpress-tools:latest
+docker tag "$TAG" flaviovs/php-tools:latest
+docker tag "$DRUPAL_TAG" flaviovs/drupal-tools:latest
+docker tag "$WORDPRESS_TAG" flaviovs/wordpress-tools:latest

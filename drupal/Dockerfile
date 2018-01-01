@@ -1,5 +1,5 @@
 ARG PHP_VERSION
-FROM php-tools:${PHP_VERSION}
+FROM flaviovs/php-tools:${PHP_VERSION}
 
 USER root
 
