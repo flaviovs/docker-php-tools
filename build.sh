@@ -5,8 +5,6 @@ set -e
 
 for V in 5.6 7.0 7.1 7.2; do
 	TAG="flaviovs/php-tools:$V"
-	DRUPAL_TAG="flaviovs/drupal-tools:$V"
-	WORDPRESS_TAG="flaviovs/wordpress-tools:$V"
 
 	echo "Building $TAG"
 	if ! docker build \
@@ -18,26 +16,33 @@ for V in 5.6 7.0 7.1 7.2; do
 		echo "Failed building $TAG" 1>&2
 		exit 1
 	fi
+done
+docker tag "$TAG" flaviovs/php-tools:latest
 
-	echo "Building $DRUPAL_TAG"
+# NB: Build only on PHP <= 7.1, because PHP 7.2 is not well
+# supported as of Dec 2017
+for V in 5.6 7.0 7.1; do
+	TAG="flaviovs/drupal-tools:$V"
+	echo "Building $TAG"
 	if ! docker build \
 		--build-arg http_proxy \
 		--build-arg "PHP_VERSION=$V" \
-			-t "$DRUPAL_TAG" drupal/; then
-		echo "Failed building $DRUPAL_TAG" 1>&2
-		exit 1
-	fi
-
-	echo "Building $WORDPRESS_TAG"
-	if ! docker build \
-		--build-arg http_proxy \
-		--build-arg "PHP_VERSION=$V" \
-			-t "$WORDPRESS_TAG" wordpress/; then
-		echo "Failed building $WORDPRESS_TAG" 1>&2
+			-t "$TAG" drupal/; then
+		echo "Failed building $TAG" 1>&2
 		exit 1
 	fi
 done
+docker tag "$TAG" flaviovs/drupal-tools:latest
 
-docker tag "$TAG" flaviovs/php-tools:latest
-docker tag "$DRUPAL_TAG" flaviovs/drupal-tools:latest
-docker tag "$WORDPRESS_TAG" flaviovs/wordpress-tools:latest
+for V in 5.6 7.0 7.1 7.2; do
+	TAG="flaviovs/wordpress-tools:$V"
+	echo "Building $TAG"
+	if ! docker build \
+		--build-arg http_proxy \
+		--build-arg "PHP_VERSION=$V" \
+			-t "$TAG" wordpress/; then
+		echo "Failed building $TAG" 1>&2
+		exit 1
+	fi
+done
+docker tag "$TAG" flaviovs/wordpress-tools:latest
