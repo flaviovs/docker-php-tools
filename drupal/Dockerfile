@@ -27,7 +27,7 @@ RUN \
 		https://git.drupal.org/sandbox/coltrane/1921926.git \
 		/tmp/drupal_secure \
 	&& mv /tmp/drupal_secure/DrupalSecure \
-                $HOME/.composer/vendor/squizlabs/php_codesniffer/src/Standards \
+		$HOME/.composer/vendor/squizlabs/php_codesniffer/CodeSniffer/Standards \
 	&& mkdir $HOME/.drush \
 	&& mv /tmp/drupal_secure/secure_cs.drush.inc $HOME/.drush \
 	\

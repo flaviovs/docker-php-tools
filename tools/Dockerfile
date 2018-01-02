@@ -92,6 +92,7 @@ RUN \
 		php${PHP_VERSION}-gd \
 		php${PHP_VERSION}-intl \
 		php${PHP_VERSION}-json \
+		php${PHP_VERSION}-mbstring \
 		php${PHP_VERSION}-mysql \
 		php${PHP_VERSION}-pspell \
 		php${PHP_VERSION}-readline \
