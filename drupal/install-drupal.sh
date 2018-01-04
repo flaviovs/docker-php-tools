@@ -26,7 +26,7 @@ composer config minimum-stability "rc"
 
 # Install with --no-update so that composer does not update,
 # which would bring in dev dependencies.
-composer require --no-update drupal/admin_menu "@dev"
+composer require --no-update drupal/admin_toolbar
 
 # Now bring everything in.
 composer update --no-dev
