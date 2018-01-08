@@ -42,4 +42,6 @@ RUN \
 	# Clean up \
 	&& rm -rf /tmp/*
 
+COPY vimrc.local /etc/vim/
+
 VOLUME /var/www

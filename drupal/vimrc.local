@@ -1,0 +1,10 @@
+autocmd BufNewFile,BufRead *.inc set filetype=php
+autocmd BufNewFile,BufRead *.module set filetype=php
+autocmd BufNewFile,BufRead *.install set filetype=php
+autocmd BufNewFile,BufRead *.twig set filetype=html
+
+autocmd Filetype php setlocal ts=2 sts=2 sw=2 expandtab smartindent
+autocmd Filetype css setlocal ts=2 sts=2 sw=2 expandtab smartindent
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab smartindent
+autocmd Filetype yaml setlocal ts=2 sts=2 sw=2 expandtab smartindent
+autocmd Filetype html setlocal ts=2 sts=2 sw=2 expandtab smartindent
