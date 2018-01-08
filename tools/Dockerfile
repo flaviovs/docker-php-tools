@@ -24,6 +24,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	\
 	# Install packages \
 	&& apt-get -y install --no-install-recommends \
+		bzip2 \
 		ca-certificates \
 		closure-compiler \
 		codespell \
