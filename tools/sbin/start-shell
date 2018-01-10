@@ -1,0 +1,37 @@
+#!/bin/sh
+
+: "${DOCUMENT_ROOT:=/var/www}"
+
+cd "$DOCUMENT_ROOT"
+
+if [ "$UMASK" != "" ]; then
+	umask "$UMASK"
+fi
+
+if mountpoint -q .; then
+	: "${LOGNAME:=app}"
+
+	GROUP="$(stat --format='%G' .)"
+	if [ "$GROUP" = "UNKNOWN" ]; then
+		# Mountpoint belongs to a group that does not
+		# exist. Create it.
+		groupadd --gid "$(stat --format='%g' .)" "$LOGNAME"
+	fi
+
+	USER="$(stat --format='%U' .)"
+	if [ "$USER" = "UNKNOWN" ]; then
+		# User does not exist. Create it.
+		useradd --home-dir "$DOCUMENT_ROOT" \
+			--gid "$LOGNAME" \
+			-M \
+			--no-user-group \
+			--shell /bin/bash \
+			--uid "$(stat --format='%u' .)" \
+				"$LOGNAME"
+	fi
+else
+	LOGNAME="www-data"
+fi
+
+exec /sbin/start-stop-daemon --start --exec /bin/bash \
+	--chdir "$DOCUMENT_ROOT" --chuid "$LOGNAME" --quiet -- -l

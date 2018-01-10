@@ -108,17 +108,15 @@ RUN \
 			php${PHP_VERSION}-mcrypt \
 		;; \
 	esac \
-	&& rm -rf /var/lib/apt/lists/* 
+	\
+	# Install default shell files and directories \
+	&& cp /etc/skel/.??* /var/www \
+	&& mkdir /var/www/bin \
+	&& chown www-data:www-data -R /var/www \
+	\
+	# Clean up \
+	&& rm -rf /var/lib/apt/lists/*
 
 COPY sbin/* /usr/sbin/
 
-USER www-data
-
-WORKDIR /var/www
-
-RUN \
-	# Install default shell files and directories \
-	cp /etc/skel/.??* . \
-	&& mkdir bin
-
-CMD ["/bin/bash", "-l"]
+CMD ["/usr/sbin/start-shell"]
