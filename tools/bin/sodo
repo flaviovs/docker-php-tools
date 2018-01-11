@@ -1,0 +1,56 @@
+#!/bin/sh
+
+USER=root
+DIR="$PWD"
+REPORT=n
+
+while getopts D:rRu: op; do
+	case "$op" in
+	D)	DIR="$OPTARG";;
+	u)	USER="$OPTARG";;
+	R)	REPORT=y;;
+	*)	exit 1
+	esac
+done
+
+shift $(($OPTIND - 1))
+
+if [ "$1" = "" ]; then
+	echo "sodo [-R] [-D DIR] [-u USER] command" 1>&2
+	exit 1
+fi
+
+cd "$DIR" || exit 1
+
+if ! getent passwd "$USER" > /dev/null; then
+	echo "$0: No such user: $USER" 1>&2
+	exit 1
+fi
+
+TEMP="$(mktemp -dt spdo.XXXXXX)" || exit 1
+trap "rm -rf $TEMP; exit 1" 1 2 3 4 5 6 7 8 10 11 12 13 14 15
+
+sudo getfacl -R . > "$TEMP/metadata"
+
+sudo chown -R "$USER": .
+sudo -u "$USER" -- "$@"
+RC=$?
+
+if [ "$REPORT" = "y" ]; then
+	sudo sudo getfacl -R . | sed -n 's/^# file: //p' | sort > "$TEMP/after"
+fi
+
+sudo setfacl --restore="$TEMP/metadata" 2>&1 | \
+	grep -v ': No such file or directory$' 1>&2
+
+if [ "$REPORT" = "y" ]; then
+	sed -n 's/^# file: //p' < "$TEMP/metadata" | sort > "$TEMP/before"
+	diff "$TEMP/before" "$TEMP/after" | \
+		sed -n \
+			-e 's/^>/added/p' \
+			-e 's/^</removed/p'
+fi
+
+rm -rf "$TEMP"
+
+exit $RC

@@ -24,6 +24,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	\
 	# Install packages \
 	&& apt-get -y install --no-install-recommends \
+		acl \
 		bzip2 \
 		ca-certificates \
 		closure-compiler \
@@ -117,6 +118,7 @@ RUN \
 	# Clean up \
 	&& rm -rf /var/lib/apt/lists/*
 
+COPY bin/* /usr/bin/
 COPY sbin/* /usr/sbin/
 
 CMD ["/usr/sbin/start-shell"]
