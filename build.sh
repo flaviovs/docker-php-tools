@@ -9,6 +9,7 @@ for V in 5.6 7.0 7.1 7.2; do
 	echo "Building $TAG"
 	if ! docker build \
 		--build-arg http_proxy \
+		--build-arg no_proxy \
 		--build-arg "PHP_VERSION=$V" \
 		--build-arg "COMPOSER_VERSION=$COMPOSER_VERSION" \
 		--build-arg "NODE_MAJOR=$NODE_MAJOR" \
@@ -26,6 +27,7 @@ for V in 5.6 7.0 7.1; do
 	echo "Building $TAG"
 	if ! docker build \
 		--build-arg http_proxy \
+		--build-arg no_proxy \
 		--build-arg "PHP_VERSION=$V" \
 			-t "$TAG" drupal/; then
 		echo "Failed building $TAG" 1>&2
@@ -39,6 +41,7 @@ for V in 5.6 7.0 7.1 7.2; do
 	echo "Building $TAG"
 	if ! docker build \
 		--build-arg http_proxy \
+		--build-arg no_proxy \
 		--build-arg "PHP_VERSION=$V" \
 			-t "$TAG" wordpress/; then
 		echo "Failed building $TAG" 1>&2
