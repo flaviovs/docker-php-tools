@@ -1,6 +1,6 @@
 #!/bin/sh
 
-: "${DOCUMENT_ROOT:=/var/www}"
+: "${DOCUMENT_ROOT:=/var/www/html}"
 
 cd "$DOCUMENT_ROOT"
 
@@ -21,13 +21,16 @@ if mountpoint -q .; then
 	USER="$(stat --format='%U' .)"
 	if [ "$USER" = "UNKNOWN" ]; then
 		# User does not exist. Create it.
-		useradd --home-dir "$DOCUMENT_ROOT" \
+		useradd --home-dir /var/www \
 			--gid "$LOGNAME" \
 			-M \
 			--no-user-group \
 			--shell /bin/bash \
 			--uid "$(stat --format='%u' .)" \
 				"$LOGNAME"
+		echo "$LOGNAME ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/php-tools
+		chmod 440 /etc/sudoers.d/php-tools
+
 	fi
 else
 	LOGNAME="www-data"
