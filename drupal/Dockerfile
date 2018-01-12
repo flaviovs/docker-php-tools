@@ -1,10 +1,6 @@
 ARG PHP_VERSION
 FROM flaviovs/php-tools:${PHP_VERSION}
 
-USER root
-
-COPY install-drupal.sh /usr/bin/install-drupal
-
 USER www-data
 
 WORKDIR /var/www
@@ -41,6 +37,10 @@ RUN \
 	\
 	# Clean up \
 	&& rm -rf /tmp/*
+
+USER root
+
+COPY install-drupal.sh /usr/bin/install-drupal
 
 COPY vimrc.local /etc/vim/
 
