@@ -68,7 +68,11 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& rm -rf /tmp/* \
 	\
 	# Remove sendmail -- will be replaced by our script \
-	&& rm -f /usr/sbin/sendmail
+	&& rm -f /usr/sbin/sendmail \
+	\
+	# Allow history back/forward just by up/down arrow \
+	&& echo '"\\e[A": history-search-backward' >> /etc/inputrc \
+	&& echo '"\\e[B": history-search-forward' >> /etc/inputrc
 
 ARG PHP_VERSION
 RUN \
