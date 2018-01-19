@@ -38,6 +38,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		mariadb-client \
 		nodejs \
 		patch \
+		procps \
 		rsync \
 		ssh-client \
 		ssmtp \
