@@ -39,6 +39,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		nodejs \
 		patch \
 		procps \
+		rename \
 		rsync \
 		ssh-client \
 		ssmtp \
