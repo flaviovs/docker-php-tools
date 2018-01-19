@@ -1,8 +1,6 @@
 #!/bin/sh
 
-: "${DOCUMENT_ROOT:=/var/www/html}"
-
-cd "$DOCUMENT_ROOT"
+cd "$DOCUMENT_ROOT" || exit 1
 
 if [ "$UMASK" != "" ]; then
 	umask "$UMASK"

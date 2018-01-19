@@ -3,6 +3,8 @@ FROM debian:stretch-slim
 ARG COMPOSER_VERSION
 ARG NODE_MAJOR
 
+ENV DOCUMENT_ROOT=/srv/www
+
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get -y install \
@@ -58,8 +60,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar \
 	&& chmod 755 /usr/bin/composer \
 	\
-	# Create www-data home directory \
-	&& install -d -o www-data -g www-data /var/www \
+	# Create www-data home & data directory \
+	&& install -d -o www-data -g www-data /var/www $DOCUMENT_ROOT \
 	\
 	# Install node utilities \
 	&& npm install -g \
