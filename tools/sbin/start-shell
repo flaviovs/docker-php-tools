@@ -32,10 +32,12 @@ if mountpoint -q .; then
 
 		echo "$LOGNAME ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/php-tools
 		chmod 440 /etc/sudoers.d/php-tools
+
+		USER="$LOGNAME"
 	fi
 else
-	LOGNAME="www-data"
+	USER="www-data"
 fi
 
 exec /sbin/start-stop-daemon --start --exec /bin/bash \
-	--chdir "$DOCUMENT_ROOT" --chuid "$LOGNAME" --quiet -- -l
+	--chdir "$DOCUMENT_ROOT" --chuid "$USER" --quiet -- -l
