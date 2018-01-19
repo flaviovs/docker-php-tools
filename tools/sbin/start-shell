@@ -16,21 +16,22 @@ if mountpoint -q .; then
 		# Mountpoint belongs to a group that does not
 		# exist. Create it.
 		groupadd --gid "$(stat --format='%g' .)" "$LOGNAME"
+		GROUP="$LOGNAME"
 	fi
 
 	USER="$(stat --format='%U' .)"
 	if [ "$USER" = "UNKNOWN" ]; then
 		# User does not exist. Create it.
 		useradd --home-dir /var/www \
-			--gid "$LOGNAME" \
+			--gid "$GROUP" \
 			-M \
 			--no-user-group \
 			--shell /bin/bash \
 			--uid "$(stat --format='%u' .)" \
 				"$LOGNAME"
+
 		echo "$LOGNAME ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/php-tools
 		chmod 440 /etc/sudoers.d/php-tools
-
 	fi
 else
 	LOGNAME="www-data"
