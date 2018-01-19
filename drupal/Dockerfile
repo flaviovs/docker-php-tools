@@ -7,7 +7,8 @@ WORKDIR /var/www
 
 RUN \
 	# Install support files using composer \
-	export COMPOSER_BIN_DIR=$HOME/bin \
+	export COMPOSER_HOME=/usr/lib/composer \
+	&& sudo install -d -o www-data -g www-data $COMPOSER_HOME \
 	&& composer global require --no-update \
 		dealerdirect/phpcodesniffer-composer-installer \
 	&& composer global update --no-dev \
@@ -15,7 +16,7 @@ RUN \
 		drupal/coder \
 		drush/drush \
 	&& composer global update --no-dev \
-	&& rm -rf $HOME/.composer/cache \
+	&& rm -rf $COMPOSER_HOME/cache \
 	\
 	# Install DrupalSecure \
 	# See https://www.drupal.org/sandbox/coltrane/1921926 \
@@ -23,7 +24,7 @@ RUN \
 		https://git.drupal.org/sandbox/coltrane/1921926.git \
 		/tmp/drupal_secure \
 	&& mv /tmp/drupal_secure/DrupalSecure \
-		$HOME/.composer/vendor/squizlabs/php_codesniffer/CodeSniffer/Standards \
+		$COMPOSER_HOME/vendor/squizlabs/php_codesniffer/CodeSniffer/Standards \
 	&& mkdir $HOME/.drush \
 	&& mv /tmp/drupal_secure/secure_cs.drush.inc $HOME/.drush \
 	\
@@ -32,10 +33,13 @@ RUN \
 	&& wget -q -O /tmp/pareviewsh.tgz \
 		https://ftp.drupal.org/files/projects/pareviewsh-7.x-1.9.tar.gz\
 	&& tar xzf /tmp/pareviewsh.tgz -C /tmp \
-	&& mv /tmp/pareviewsh $HOME/.pareviewsh \
-	&& ln -s ../.pareviewsh/pareview.sh $HOME/bin \
+	&& sudo mv /tmp/pareviewsh /usr/lib \
+	&& sudo ln -s /usr/lib/pareviewsh/pareview.sh /usr/bin/pareview \
+	\
+	&& sudo ln -nsf /usr/lib/composer/vendor/bin/* /usr/bin \
 	\
 	# Clean up \
+	&& sudo chown -R 0:0 /usr/lib/composer /usr/lib/pareviewsh \
 	&& rm -rf /tmp/*
 
 USER root

@@ -10,8 +10,10 @@ RUN \
 	composer \
 		create-project wp-coding-standards/wpcs \
 		--no-dev \
-			.wpcs \
-	&& (cd bin; ln -s ../.wpcs/vendor/bin/* .) \
+			/tmp/wpcs \
+	&& sudo mv /tmp/wpcs /usr/lib \
+	&& sudo chown -R 0:0 /usr/lib/wpcs \
+	&& sudo ln -s /usr/lib/wpcs/vendor/bin/* /usr/bin \
 	&& rm -rf $HOME/.composer/cache
 
 USER root
