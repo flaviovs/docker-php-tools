@@ -7,7 +7,7 @@ if [ "$UMASK" != "" ]; then
 fi
 
 if mountpoint -q .; then
-	: "${LOGNAME:=app}"
+	: "${LOGNAME:=me}"
 
 	GROUP="$(stat --format='%G' .)"
 	if [ "$GROUP" = "UNKNOWN" ]; then
@@ -20,7 +20,7 @@ if mountpoint -q .; then
 	USER="$(stat --format='%U' .)"
 	if [ "$USER" = "UNKNOWN" ]; then
 		# User does not exist. Create it.
-		useradd --home-dir /var/www \
+		useradd --create-home --home-dir /home/me \
 			--gid "$GROUP" \
 			-M \
 			--no-user-group \
