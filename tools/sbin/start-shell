@@ -22,7 +22,6 @@ if mountpoint -q .; then
 		# User does not exist. Create it.
 		useradd --create-home --home-dir /home/me \
 			--gid "$GROUP" \
-			-M \
 			--no-user-group \
 			--shell /bin/bash \
 			--uid "$(stat --format='%u' .)" \
