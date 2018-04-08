@@ -13,8 +13,8 @@ RUN \
 		dealerdirect/phpcodesniffer-composer-installer \
 	&& composer global update --no-dev \
 	&& composer global require --no-update \
-		drupal/coder \
-		drush/drush \
+		"drupal/coder" \
+		"drush/drush:8.*" \
 	&& composer global update --no-dev \
 	&& rm -rf $COMPOSER_HOME/cache \
 	\
