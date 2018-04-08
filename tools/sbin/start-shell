@@ -6,14 +6,20 @@ if [ "$UMASK" != "" ]; then
 	umask "$UMASK"
 fi
 
-if mountpoint -q .; then
+mnt=$(pwd)
+while [ "$mnt" != "" ]; do
+	mountpoint -q "$mnt" && break
+	mnt="${mnt%/*}"
+done
+
+if [ "$mnt" != "" ]; then
 	: "${LOGNAME:=me}"
 
-	GROUP="$(stat --format='%G' .)"
+	GROUP="$(stat --format='%G' $mnt)"
 	if [ "$GROUP" = "UNKNOWN" ]; then
 		# Mountpoint belongs to a group that does not
 		# exist. Create it.
-		groupadd --gid "$(stat --format='%g' .)" "$LOGNAME"
+		groupadd --gid "$(stat --format='%g' $mnt)" "$LOGNAME"
 		GROUP="$LOGNAME"
 	fi
 
@@ -24,7 +30,7 @@ if mountpoint -q .; then
 			--gid "$GROUP" \
 			--no-user-group \
 			--shell /bin/bash \
-			--uid "$(stat --format='%u' .)" \
+			--uid "$(stat --format='%u' $mnt)" \
 				"$LOGNAME"
 
 		echo "$LOGNAME ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/php-tools
