@@ -1,5 +1,6 @@
 autocmd BufNewFile,BufRead *.inc set filetype=php
 autocmd BufNewFile,BufRead *.module set filetype=php
+autocmd BufNewFile,BufRead *.theme set filetype=php
 autocmd BufNewFile,BufRead *.install set filetype=php
 autocmd BufNewFile,BufRead *.twig set filetype=html
 
