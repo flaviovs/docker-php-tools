@@ -129,4 +129,5 @@ RUN \
 COPY bin/* /usr/bin/
 COPY sbin/* /usr/sbin/
 
-CMD ["/usr/sbin/start-shell"]
+ENTRYPOINT ["/usr/sbin/start-shell"]
+CMD ["/bin/bash", "--login"]

@@ -42,5 +42,17 @@ else
 	USER="www-data"
 fi
 
-exec /sbin/start-stop-daemon --start --exec /bin/bash \
-	--chdir "$DOCUMENT_ROOT" --chuid "$USER" --quiet -- -l
+if [ "$1" = "" ]; then
+	COMMAND="/bin/bash"
+	set -- "$@"
+else
+	COMMAND=$(command -v $1)
+	if [ "$COMMAND" = "" ]; then
+		echo "$1: Command not found" 1>&2
+		exit 1
+	fi
+	shift
+fi
+
+exec /sbin/start-stop-daemon --start --exec "$COMMAND" \
+	--chdir "$DOCUMENT_ROOT" --chuid "$USER" --quiet -- "$@"
