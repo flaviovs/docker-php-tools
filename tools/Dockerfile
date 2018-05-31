@@ -22,7 +22,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	\
 	# Create man directory to avoid error when installing some packages \
-	&& mkdir -p /usr/share/man/man1/ \
+	&& mkdir -p /usr/share/man/man1/ /usr/share/man/man7/ \
 	\
 	# Install packages \
 	&& apt-get -y install --no-install-recommends \
@@ -40,6 +40,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		mariadb-client \
 		nodejs \
 		patch \
+		postgresql-client \
 		procps \
 		rename \
 		rsync \
