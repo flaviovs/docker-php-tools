@@ -105,6 +105,7 @@ RUN \
 		php${PHP_VERSION}-json \
 		php${PHP_VERSION}-mbstring \
 		php${PHP_VERSION}-mysql \
+		php${PHP_VERSION}-pgsql \
 		php${PHP_VERSION}-pspell \
 		php${PHP_VERSION}-readline \
 		php${PHP_VERSION}-sqlite \
