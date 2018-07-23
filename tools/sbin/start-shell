@@ -12,7 +12,7 @@ while [ "$mnt" != "" ]; do
 	mnt="${mnt%/*}"
 done
 
-if [ "$mnt" != "" ]; then
+if [ "$mnt" != "" -a "$(id -u)" -eq 0 ]; then
 	: "${LOGNAME:=me}"
 
 	GROUP="$(stat --format='%G' $mnt)"
