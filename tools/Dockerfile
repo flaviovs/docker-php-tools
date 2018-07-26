@@ -32,6 +32,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		closure-compiler \
 		codespell \
 		curl \
+		geoip-database \
+		geoip-database-extra \
 		git \
 		git-ftp \
 		host \
@@ -101,6 +103,7 @@ RUN \
 		php${PHP_VERSION}-cli \
 		php${PHP_VERSION}-curl \
 		php${PHP_VERSION}-gd \
+		php${PHP_VERSION}-geoip \
 		php${PHP_VERSION}-intl \
 		php${PHP_VERSION}-json \
 		php${PHP_VERSION}-mbstring \
