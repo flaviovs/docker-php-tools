@@ -1,6 +1,6 @@
 set -e 
 
-: "${COMPOSER_VERSION:=1.5.6}"
+: "${COMPOSER_VERSION:=1.7.2}"
 : "${NODE_MAJOR:=6}"
 
 for V in 5.6 7.0 7.1 7.2; do
