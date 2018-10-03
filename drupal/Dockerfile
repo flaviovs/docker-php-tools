@@ -18,16 +18,6 @@ RUN \
 	&& composer global update --no-dev \
 	&& rm -rf $COMPOSER_HOME/cache \
 	\
-	# Install DrupalSecure \
-	# See https://www.drupal.org/sandbox/coltrane/1921926 \
-	&& git clone --branch master \
-		https://git.drupal.org/sandbox/coltrane/1921926.git \
-		/tmp/drupal_secure \
-	&& mv /tmp/drupal_secure/DrupalSecure \
-		$COMPOSER_HOME/vendor/squizlabs/php_codesniffer/CodeSniffer/Standards \
-	&& mkdir $HOME/.drush \
-	&& mv /tmp/drupal_secure/secure_cs.drush.inc $HOME/.drush \
-	\
 	# Install PAReview.sh \
 	# See https://www.drupal.org/project/pareviewsh \
 	&& wget -q -O /tmp/pareviewsh.tgz \
