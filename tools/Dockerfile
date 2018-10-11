@@ -114,6 +114,7 @@ RUN \
 		php${PHP_VERSION}-sqlite \
 		php${PHP_VERSION}-xmlrpc \
 		php${PHP_VERSION}-xml \
+		php${PHP_VERSION}-zip \
 	\
 	# Version specific packages \
 	&& case "${PHP_VERSION}" in \
