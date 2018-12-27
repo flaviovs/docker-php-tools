@@ -9,20 +9,21 @@
 # Send everything to stderr
 exec 1>&2
 
-echo "-------------------------------------------"
 if [ "$SENDMAIL_SEND" = "y" ]; then
-	echo "Sending email:"
 	/usr/sbin/ssmtp "$@"
 	rc=$?
 else
+	echo "-------------------------------------------"
 	echo "Simulating email delivery. Set SENDMAIL_SEND to \"y\""
 	echo "to do actual delivery."
-	echo
-	echo "Command line: $0 $@"
+	echo ""
+	echo "Command line:"
+	echo "  $0 $@"
+	echo ""
 	echo "Message:"
 	cat
+	echo "-------------------------------------------"
 	rc=0
 fi
-echo "-------------------------------------------"
 
 exit $rc
