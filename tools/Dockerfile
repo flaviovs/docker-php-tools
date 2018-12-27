@@ -100,6 +100,7 @@ RUN \
 	esac \
 	\
 	&& apt-get -y install --no-install-recommends \
+		php${PHP_VERSION}-bcmath \
 		php${PHP_VERSION}-cli \
 		php${PHP_VERSION}-curl \
 		php${PHP_VERSION}-gd \
