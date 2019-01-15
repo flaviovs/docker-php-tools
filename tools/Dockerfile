@@ -112,6 +112,7 @@ RUN \
 		php${PHP_VERSION}-pgsql \
 		php${PHP_VERSION}-pspell \
 		php${PHP_VERSION}-readline \
+		php${PHP_VERSION}-soap \
 		php${PHP_VERSION}-sqlite \
 		php${PHP_VERSION}-xmlrpc \
 		php${PHP_VERSION}-xml \
