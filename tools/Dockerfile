@@ -46,6 +46,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		procps \
 		rename \
 		rsync \
+		sassc \
 		ssh-client \
 		ssmtp \
 		sudo \
