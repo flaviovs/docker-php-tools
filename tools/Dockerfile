@@ -127,6 +127,10 @@ RUN \
 		;; \
 	esac \
 	\
+	# Enable assertion control \
+	&& sed -i -e 's/^zend.assertions\b.*/zend.assertions = 0/' \
+		/etc/php/*/cli/php.ini \
+	\
 	# Install default shell files and directories \
 	&& cp /etc/skel/.??* /var/www \
 	&& mkdir /var/www/bin \
