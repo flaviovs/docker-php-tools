@@ -40,6 +40,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		iputils-ping \
 		less \
 		mariadb-client \
+		mongodb-clients \
 		nodejs \
 		patch \
 		postgresql-client \
@@ -110,6 +111,7 @@ RUN \
 		php${PHP_VERSION}-intl \
 		php${PHP_VERSION}-json \
 		php${PHP_VERSION}-mbstring \
+		php${PHP_VERSION}-mongodb \
 		php${PHP_VERSION}-mysql \
 		php${PHP_VERSION}-pgsql \
 		php${PHP_VERSION}-pspell \
