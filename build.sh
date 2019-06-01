@@ -20,9 +20,7 @@ for V in 5.6 7.0 7.1 7.2; do
 done
 docker tag "$TAG" flaviovs/php-tools:latest
 
-# NB: Build only on PHP <= 7.1, because PHP 7.2 is not well
-# supported as of Dec 2017
-for V in 5.6 7.0 7.1; do
+for V in 5.6 7.0 7.1 7.2; do
 	TAG="flaviovs/drupal-tools:$V"
 	echo "Building $TAG"
 	if ! docker build \
