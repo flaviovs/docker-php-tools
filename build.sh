@@ -3,7 +3,7 @@ set -e
 : "${COMPOSER_VERSION:=1.8.3}"
 : "${NODE_MAJOR:=6}"
 
-for V in 5.6 7.0 7.1 7.2; do
+for V in 5.6 7.0 7.1 7.2 7.3; do
 	TAG="flaviovs/php-tools:$V"
 
 	echo "Building $TAG"
@@ -20,7 +20,7 @@ for V in 5.6 7.0 7.1 7.2; do
 done
 docker tag "$TAG" flaviovs/php-tools:latest
 
-for V in 5.6 7.0 7.1 7.2; do
+for V in 5.6 7.0 7.1 7.2 7.3; do
 	TAG="flaviovs/drupal-tools:$V"
 	echo "Building $TAG"
 	if ! docker build \
@@ -34,7 +34,7 @@ for V in 5.6 7.0 7.1 7.2; do
 done
 docker tag "$TAG" flaviovs/drupal-tools:latest
 
-for V in 5.6 7.0 7.1 7.2; do
+for V in 5.6 7.0 7.1 7.2 7.3; do
 	TAG="flaviovs/wordpress-tools:$V"
 	echo "Building $TAG"
 	if ! docker build \
