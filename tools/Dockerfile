@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 ARG COMPOSER_VERSION
 ARG NODE_MAJOR
@@ -8,14 +8,13 @@ ENV DOCUMENT_ROOT=/srv/www
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& apt-get update \
 	&& apt-get -y install \
-		apt-transport-https \
 		ca-certificates \
 		gnupg \
 		wget \
 	&& apt-get update \
 	\
 	# Install nodejs DEB source \
-	&& echo "deb https://deb.nodesource.com/node_${NODE_MAJOR}.x stretch main" \
+	&& echo "deb https://deb.nodesource.com/node_${NODE_MAJOR}.x buster main" \
 		>> /etc/apt/sources.list \
 	&& wget -q -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
 		| apt-key add - \
@@ -40,8 +39,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		iputils-ping \
 		less \
 		mariadb-client \
-		mongodb-clients \
+		msmtp \
 		nodejs \
+		npm \
 		patch \
 		postgresql-client \
 		procps \
@@ -50,7 +50,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		rsync \
 		sassc \
 		ssh-client \
-		ssmtp \
 		sudo \
 		telnet \
 		vim \
@@ -60,6 +59,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	# Setup sudo \
 	&& echo "www-data ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/local \
 	&& chmod 440 /etc/sudoers.d/local \
+	\
+	# Setup msmtp \
+	&& echo 'host mail' > /etc/msmtprc \
 	\
 	# Install composer \
 	&& wget -q -O /usr/bin/composer \
@@ -88,15 +90,15 @@ ARG PHP_VERSION
 RUN \
 	export DEBIAN_FRONTEND=noninteractive \
 	&& case "$PHP_VERSION" in \
-	7.0) \
-		# Use stretch's PHP 7.0 \
+	7.3) \
+		# Use busters's PHP 7.3 \
 		;; \
 	*) \
 		# Install sury.org repository \
-		echo "deb https://packages.sury.org/php/ stretch main" \
+		echo "deb https://packages.sury.org/php/ buster main" \
 			>> /etc/apt/sources.list \
-		&& wget -q -O - https://packages.sury.org/php/apt.gpg \
-			| apt-key add - \
+		&& wget -O /etc/apt/trusted.gpg.d/php.gpg \
+			https://packages.sury.org/php/apt.gpg \
 		\
 		&& apt-get update \
 		;; \
@@ -111,7 +113,6 @@ RUN \
 		php${PHP_VERSION}-intl \
 		php${PHP_VERSION}-json \
 		php${PHP_VERSION}-mbstring \
-		php${PHP_VERSION}-mongodb \
 		php${PHP_VERSION}-mysql \
 		php${PHP_VERSION}-pgsql \
 		php${PHP_VERSION}-pspell \

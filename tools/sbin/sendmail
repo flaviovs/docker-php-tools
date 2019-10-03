@@ -3,14 +3,14 @@
 # Mock /usr/sbin/sendmail -- just display the message to be sent.
 # This is used to avoid emails to be sent by default.
 #
-# Set variable SENDMAIL_SEND=y to call /usr/sbin/sendmail.orig
+# Set variable SENDMAIL_SEND=y to call msmtp for sending it out.
 #
 
 # Send everything to stderr
 exec 1>&2
 
 if [ "$SENDMAIL_SEND" = "y" ]; then
-	/usr/sbin/ssmtp "$@"
+	/usr/bin/msmtp "$@"
 	rc=$?
 else
 	echo "-------------------------------------------"
