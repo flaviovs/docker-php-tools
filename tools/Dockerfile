@@ -1,7 +1,6 @@
 FROM debian:buster-slim
 
 ARG COMPOSER_VERSION
-ARG NODE_MAJOR
 
 ENV DOCUMENT_ROOT=/srv/www
 
@@ -11,13 +10,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		ca-certificates \
 		gnupg \
 		wget \
-	&& apt-get update \
-	\
-	# Install nodejs DEB source \
-	&& echo "deb https://deb.nodesource.com/node_${NODE_MAJOR}.x buster main" \
-		>> /etc/apt/sources.list \
-	&& wget -q -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
-		| apt-key add - \
 	&& apt-get update \
 	\
 	# Create man directory to avoid error when installing some packages \

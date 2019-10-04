@@ -3,7 +3,6 @@ set -e
 TAG_VERSION=buster
 
 : "${COMPOSER_VERSION:=1.8.6}"
-: "${NODE_MAJOR:=6}"
 
 for V in 5.6 7.0 7.1 7.2 7.3; do
 	TAG="flaviovs/php-tools:$V-$TAG_VERSION"
@@ -14,7 +13,6 @@ for V in 5.6 7.0 7.1 7.2 7.3; do
 		--build-arg no_proxy \
 		--build-arg "PHP_VERSION=$V" \
 		--build-arg "COMPOSER_VERSION=$COMPOSER_VERSION" \
-		--build-arg "NODE_MAJOR=$NODE_MAJOR" \
 			-t "$TAG" tools/; then
 		echo "Failed building $TAG" 1>&2
 		exit 1
