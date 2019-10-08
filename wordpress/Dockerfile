@@ -1,6 +1,6 @@
 ARG PHP_VERSION
 
-FROM flaviovs/php-tools:${PHP_VERSION}
+FROM flaviovs/php-tools:${PHP_VERSION}-buster
 
 USER www-data
 WORKDIR /var/www
