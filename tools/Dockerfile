@@ -27,6 +27,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		geoip-database-extra \
 		git \
 		git-ftp \
+		gulp \
 		host \
 		iputils-ping \
 		less \
