@@ -5,17 +5,9 @@ ARG COMPOSER_VERSION
 ENV DOCUMENT_ROOT=/srv/www
 
 RUN export DEBIAN_FRONTEND=noninteractive \
-	&& apt-get update \
-	&& apt-get -y install \
-		ca-certificates \
-		gnupg \
-		wget \
-	&& apt-get update \
-	\
-	# Create man directory to avoid error when installing some packages \
-	&& mkdir -p /usr/share/man/man1/ /usr/share/man/man7/ \
 	\
 	# Install packages \
+	&& apt-get update \
 	&& apt-get -y install --no-install-recommends \
 		acl \
 		bzip2 \
@@ -27,6 +19,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		geoip-database-extra \
 		git \
 		git-ftp \
+		gnupg \
 		gulp \
 		host \
 		iputils-ping \
@@ -46,6 +39,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		sudo \
 		telnet \
 		vim \
+		wget \
 		yui-compressor \
 	&& rm -rf /usr/share/man/* \
 	\
