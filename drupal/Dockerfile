@@ -7,15 +7,10 @@ WORKDIR /var/www
 
 RUN \
 	# Install support files using composer \
-	export COMPOSER_HOME=/usr/lib/composer \
-	&& sudo install -d -o www-data -g www-data $COMPOSER_HOME \
-	&& composer global require --no-update \
-		dealerdirect/phpcodesniffer-composer-installer \
-	&& composer global update --no-dev \
-	&& composer global require --no-update \
+	composer global require --no-update \
 		"drupal/coder" \
 		"drush/drush:8.*" \
-	&& composer global update --no-dev \
+	&& composer global update --no-dev --classmap-authoritative \
 	&& rm -rf $COMPOSER_HOME/cache \
 	\
 	# Install PAReview.sh \

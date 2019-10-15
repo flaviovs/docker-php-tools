@@ -9,11 +9,13 @@ RUN \
 	# Install WPCS \
 	composer \
 		create-project wp-coding-standards/wpcs \
-		--no-dev \
+		--no-dev --no-install \
 			/tmp/wpcs \
+	&& composer --working-dir=/tmp/wpcs install \
+		--classmap-authoritative --no-dev \
 	&& sudo mv /tmp/wpcs /usr/lib \
 	&& sudo chown -R 0:0 /usr/lib/wpcs \
-	&& sudo ln -s /usr/lib/wpcs/vendor/bin/* /usr/bin \
+	&& sudo ln -snf /usr/lib/wpcs/vendor/bin/* /usr/bin \
 	&& rm -rf $HOME/.composer/cache
 
 USER root

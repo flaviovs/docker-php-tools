@@ -3,6 +3,7 @@ FROM debian:buster-slim
 ARG COMPOSER_VERSION
 
 ENV DOCUMENT_ROOT=/srv/www
+ENV COMPOSER_HOME=/usr/lib/composer
 
 RUN export DEBIAN_FRONTEND=noninteractive \
 	\
@@ -129,7 +130,17 @@ RUN \
 	&& chown www-data:www-data -R /var/www \
 	\
 	# Clean up \
-	&& rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/* \
+	\
+	# Setup composer \
+	&& sudo install -d -o www-data -g www-data $COMPOSER_HOME \
+	&& sudo -u www-data env COMPOSER_HOME=$COMPOSER_HOME \
+		composer global require --no-update \
+			dealerdirect/phpcodesniffer-composer-installer \
+	&& sudo -u www-data env COMPOSER_HOME=$COMPOSER_HOME \
+		composer global update --no-dev --classmap-authoritative \
+	&& sudo ln -nsf $COMPOSER_HOME/vendor/bin/* /usr/bin \
+	&& rm -rf $HOME/.composer/cache
 
 COPY bin/* /usr/bin/
 COPY sbin/* /usr/sbin/
