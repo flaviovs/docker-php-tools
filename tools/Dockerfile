@@ -137,6 +137,7 @@ RUN \
 	&& sudo -u www-data env COMPOSER_HOME=$COMPOSER_HOME \
 		composer global require --no-update \
 			dealerdirect/phpcodesniffer-composer-installer \
+			hirak/prestissimo \
 	&& sudo -u www-data env COMPOSER_HOME=$COMPOSER_HOME \
 		composer global update --no-dev --classmap-authoritative \
 	&& sudo ln -nsf $COMPOSER_HOME/vendor/bin/* /usr/bin \
