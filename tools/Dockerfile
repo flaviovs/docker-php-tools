@@ -51,11 +51,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	# Setup msmtp \
 	&& echo 'host mail' > /etc/msmtprc \
 	\
-	# Install composer \
-	&& wget -q -O /usr/bin/composer \
-		https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar \
-	&& chmod 755 /usr/bin/composer \
-	\
 	# Create www-data home & data directory \
 	&& install -d -o www-data -g www-data /var/www $DOCUMENT_ROOT \
 	\
@@ -130,7 +125,13 @@ RUN \
 	&& chown www-data:www-data -R /var/www \
 	\
 	# Clean up \
-	&& rm -rf /var/lib/apt/lists/* \
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN \
+	# Install composer \
+	wget -q -O /usr/bin/composer \
+		https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar \
+	&& chmod 755 /usr/bin/composer \
 	\
 	# Setup composer \
 	&& sudo install -d -o www-data -g www-data $COMPOSER_HOME \
