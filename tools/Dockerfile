@@ -145,7 +145,9 @@ RUN \
 	&& sudo -u www-data env COMPOSER_HOME=$COMPOSER_HOME \
 		composer global update --no-dev --classmap-authoritative \
 	&& sudo ln -nsf $COMPOSER_HOME/vendor/bin/* /usr/bin \
-	&& rm -rf $HOME/.composer/cache
+	&& rm -rf $COMPOSER_HOME/cache \
+	&& echo 'COMPOSER_CACHE_DIR=$HOME/.composer/cache' >> /etc/skel/.profile \
+	&& echo 'export COMPOSER_CACHE_DIR' >> /etc/skel/.profile
 
 COPY bin/* /usr/bin/
 COPY sbin/* /usr/sbin/
