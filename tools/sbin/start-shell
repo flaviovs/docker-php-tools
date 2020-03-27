@@ -2,9 +2,10 @@
 
 cd "$DOCUMENT_ROOT" || exit 1
 
-if [ "$UMASK" != "" ]; then
-	umask "$UMASK"
+if [ "$UMASK" = "" ]; then
+	UMASK=0002
 fi
+umask "$UMASK"
 
 mnt=$(pwd)
 while [ "$mnt" != "" ]; do
@@ -55,4 +56,5 @@ else
 fi
 
 exec /sbin/start-stop-daemon --start --exec "$COMMAND" \
-	--chdir "$DOCUMENT_ROOT" --chuid "$USER" --quiet -- "$@"
+	--umask $UMASK --chdir "$DOCUMENT_ROOT" --chuid "$USER" \
+	--quiet -- "$@"
