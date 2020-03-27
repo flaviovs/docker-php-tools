@@ -29,6 +29,7 @@ if [ "$mnt" != "" -a "$(id -u)" -eq 0 ]; then
 		# User does not exist. Create it.
 		useradd --create-home --home-dir /home/me \
 			--gid "$GROUP" \
+			--groups www-data \
 			--no-user-group \
 			--shell /bin/bash \
 			--uid "$(stat --format='%u' $mnt)" \
