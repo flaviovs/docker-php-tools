@@ -1,7 +1,5 @@
 FROM debian:buster-slim
 
-ARG COMPOSER_VERSION
-
 ENV DOCUMENT_ROOT=/srv/www
 ENV COMPOSER_HOME=/usr/lib/composer
 
@@ -129,6 +127,7 @@ RUN \
 	# Clean up \
 	&& rm -rf /var/lib/apt/lists/*
 
+ARG COMPOSER_VERSION
 RUN \
 	# Install composer \
 	wget -q -O /usr/bin/composer \
