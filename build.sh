@@ -2,7 +2,7 @@ set -e
 
 TAG_VERSION=buster
 
-: "${COMPOSER_VERSION:=1.8.6}"
+: "${COMPOSER_VERSION:=1.10.5}"
 
 for V in 5.6 7.0 7.1 7.2 7.3; do
 	TAG="flaviovs/php-tools:$V-$TAG_VERSION"
