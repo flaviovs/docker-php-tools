@@ -2,7 +2,7 @@ set -e
 
 sh build.sh
 
-TAG_VERSION=buster
+. ./vars.sh
 
 for V in latest 5.6 7.2 7.3; do
 	TAG="flaviovs/php-tools:$V-$TAG_VERSION"

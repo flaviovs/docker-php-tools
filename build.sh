@@ -1,6 +1,6 @@
 set -e 
 
-TAG_VERSION=buster
+. ./vars.sh
 
 : "${COMPOSER_VERSION:=1.10.5}"
 
@@ -11,6 +11,7 @@ for V in 5.6 7.2 7.3; do
 	if ! docker build \
 		--build-arg http_proxy \
 		--build-arg no_proxy \
+		--build-arg "TAG_VERSION=$TAG_VERSION" \
 		--build-arg "PHP_VERSION=$V" \
 		--build-arg "COMPOSER_VERSION=$COMPOSER_VERSION" \
 			-t "$TAG" tools/; then
@@ -26,6 +27,7 @@ for V in 5.6 7.2 7.3; do
 	if ! docker build \
 		--build-arg http_proxy \
 		--build-arg no_proxy \
+		--build-arg "TAG_VERSION=$TAG_VERSION" \
 		--build-arg "PHP_VERSION=$V" \
 			-t "$TAG" drupal/; then
 		echo "Failed building $TAG" 1>&2
@@ -40,6 +42,7 @@ for V in 5.6 7.2 7.3; do
 	if ! docker build \
 		--build-arg http_proxy \
 		--build-arg no_proxy \
+		--build-arg "TAG_VERSION=$TAG_VERSION" \
 		--build-arg "PHP_VERSION=$V" \
 			-t "$TAG" wordpress/; then
 		echo "Failed building $TAG" 1>&2

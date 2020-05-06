@@ -1,6 +1,7 @@
+ARG TAG_VERSION
 ARG PHP_VERSION
 
-FROM flaviovs/php-tools:${PHP_VERSION}-buster
+FROM flaviovs/php-tools:${PHP_VERSION}-${TAG_VERSION}
 
 USER www-data
 WORKDIR /var/www
