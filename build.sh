@@ -4,7 +4,7 @@ TAG_VERSION=buster
 
 : "${COMPOSER_VERSION:=1.10.5}"
 
-for V in 5.6 7.0 7.1 7.2 7.3; do
+for V in 5.6 7.2 7.3; do
 	TAG="flaviovs/php-tools:$V-$TAG_VERSION"
 
 	echo "Building $TAG"
@@ -20,7 +20,7 @@ for V in 5.6 7.0 7.1 7.2 7.3; do
 done
 docker tag "$TAG" flaviovs/php-tools:latest-$TAG_VERSION
 
-for V in 5.6 7.0 7.1 7.2 7.3; do
+for V in 5.6 7.2 7.3; do
 	TAG="flaviovs/drupal-tools:$V-$TAG_VERSION"
 	echo "Building $TAG"
 	if ! docker build \
@@ -34,7 +34,7 @@ for V in 5.6 7.0 7.1 7.2 7.3; do
 done
 docker tag "$TAG" flaviovs/drupal-tools:latest-$TAG_VERSION
 
-for V in 5.6 7.0 7.1 7.2 7.3; do
+for V in 5.6 7.2 7.3; do
 	TAG="flaviovs/wordpress-tools:$V-$TAG_VERSION"
 	echo "Building $TAG"
 	if ! docker build \
