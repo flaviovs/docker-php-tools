@@ -24,6 +24,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		host \
 		iputils-ping \
 		less \
+		libmemcached-tools \
 		mariadb-client \
 		msmtp \
 		nodejs \
@@ -34,6 +35,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		redis-tools \
 		rename \
 		rsync \
+		sasl2-bin \
 		sassc \
 		ssh-client \
 		sudo \
@@ -92,10 +94,12 @@ RUN \
 		php${PHP_VERSION}-curl \
 		php${PHP_VERSION}-gd \
 		php${PHP_VERSION}-geoip \
+		php${PHP_VERSION}-igbinary \
 		php${PHP_VERSION}-intl \
 		php${PHP_VERSION}-imap \
 		php${PHP_VERSION}-json \
 		php${PHP_VERSION}-mbstring \
+		php${PHP_VERSION}-memcached \
 		php${PHP_VERSION}-mysql \
 		php${PHP_VERSION}-pgsql \
 		php${PHP_VERSION}-pspell \
