@@ -2,7 +2,7 @@ set -e
 
 . ./vars.sh
 
-: "${COMPOSER_VERSION:=1.10.5}"
+: "${COMPOSER_VERSION:=2.1.3}"
 
 for V in 5.6 7.2 7.3; do
 	TAG="flaviovs/php-tools:$V-$TAG_VERSION"
