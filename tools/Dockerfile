@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 ENV DOCUMENT_ROOT=/srv/www
 ENV COMPOSER_HOME=/usr/lib/composer
@@ -16,7 +16,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		codespell \
 		curl \
 		geoip-database \
-		geoip-database-extra \
 		git \
 		git-ftp \
 		gnupg \
@@ -74,8 +73,8 @@ ARG PHP_VERSION
 RUN \
 	export DEBIAN_FRONTEND=noninteractive \
 	&& case "$PHP_VERSION" in \
-	7.3) \
-		# Use busters's PHP 7.3 \
+	7.4) \
+		# Use bullseye's PHP 7.4 \
 		;; \
 	*) \
 		# Install sury.org repository \
