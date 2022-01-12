@@ -54,11 +54,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	# Create www-data home & data directory \
 	&& install -d -o www-data -g www-data /var/www $DOCUMENT_ROOT \
 	\
-	# Install node utilities \
-	&& npm install -g \
-		eslint \
-		uncss \
-	\
 	# Final setup & clean up \
 	&& rm -rf /tmp/* \
 	\
