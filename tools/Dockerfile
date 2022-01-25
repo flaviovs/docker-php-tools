@@ -41,6 +41,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		sudo \
 		telnet \
 		vim \
+		vim-addon-manager \
+		vim-editorconfig \
 		wget \
 		yui-compressor \
 	&& rm -rf /usr/share/man/* \
@@ -51,6 +53,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	\
 	# Setup msmtp \
 	&& echo 'host mail' > /etc/msmtprc \
+	\
+	# Setup vim \
+	&& vim-addon-manager --system-wide install editorconfig \
 	\
 	# Create www-data home & data directory \
 	&& install -d -o www-data -g www-data /var/www $DOCUMENT_ROOT \
