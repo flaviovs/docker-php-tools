@@ -1,5 +1,7 @@
 FROM debian:bullseye-slim
 
+ARG TAG_VERSION
+
 ENV DOCUMENT_ROOT=/srv/www
 ENV COMPOSER_HOME=/usr/lib/composer
 
