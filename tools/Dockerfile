@@ -99,6 +99,7 @@ RUN \
 		php${PHP_VERSION}-intl \
 		php${PHP_VERSION}-imap \
 		php${PHP_VERSION}-json \
+		php${PHP_VERSION}-mailparse \
 		php${PHP_VERSION}-mbstring \
 		php${PHP_VERSION}-memcached \
 		php${PHP_VERSION}-mysql \
