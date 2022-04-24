@@ -80,7 +80,7 @@ RUN \
 		;; \
 	*) \
 		# Install sury.org repository \
-		echo "deb https://packages.sury.org/php/ buster main" \
+		echo "deb https://packages.sury.org/php/ bullseye main" \
 			>> /etc/apt/sources.list \
 		&& wget -O /etc/apt/trusted.gpg.d/php.gpg \
 			https://packages.sury.org/php/apt.gpg \
