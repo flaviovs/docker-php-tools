@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ARG TAG_VERSION
 
@@ -75,49 +75,55 @@ ARG PHP_VERSION
 RUN \
 	export DEBIAN_FRONTEND=noninteractive \
 	&& case "$PHP_VERSION" in \
-	7.4) \
-		# Use bullseye's PHP 7.4 \
+	8.2) \
+                # Use native PHP version \
+                APT_VERSION="" \
 		;; \
 	*) \
 		# Install sury.org repository \
-		echo "deb https://packages.sury.org/php/ bullseye main" \
+		echo "deb https://packages.sury.org/php/ bookworm main" \
 			>> /etc/apt/sources.list \
 		&& wget -O /etc/apt/trusted.gpg.d/php.gpg \
 			https://packages.sury.org/php/apt.gpg \
 		\
 		&& apt-get update \
+                && APT_VERSION="$PHP_VERSION" \
 		;; \
 	esac \
 	\
 	&& apt-get -y install --no-install-recommends \
-		php${PHP_VERSION}-bcmath \
-		php${PHP_VERSION}-cli \
-		php${PHP_VERSION}-curl \
-		php${PHP_VERSION}-gd \
-		php${PHP_VERSION}-geoip \
-		php${PHP_VERSION}-igbinary \
-		php${PHP_VERSION}-intl \
-		php${PHP_VERSION}-imap \
-		php${PHP_VERSION}-json \
-		php${PHP_VERSION}-mailparse \
-		php${PHP_VERSION}-mbstring \
-		php${PHP_VERSION}-memcached \
-		php${PHP_VERSION}-mysql \
-		php${PHP_VERSION}-pgsql \
-		php${PHP_VERSION}-pspell \
-		php${PHP_VERSION}-readline \
-		php${PHP_VERSION}-redis \
-		php${PHP_VERSION}-soap \
-		php${PHP_VERSION}-sqlite \
-		php${PHP_VERSION}-xmlrpc \
-		php${PHP_VERSION}-xml \
-		php${PHP_VERSION}-zip \
+		php${APT_VERSION}-bcmath \
+		php${APT_VERSION}-cli \
+		php${APT_VERSION}-curl \
+		php${APT_VERSION}-gd \
+		php${APT_VERSION}-igbinary \
+		php${APT_VERSION}-intl \
+		php${APT_VERSION}-imap \
+		php${APT_VERSION}-json \
+		php${APT_VERSION}-mailparse \
+		php${APT_VERSION}-mbstring \
+		php${APT_VERSION}-memcached \
+		php${APT_VERSION}-mysql \
+		php${APT_VERSION}-pgsql \
+		php${APT_VERSION}-pspell \
+		php${APT_VERSION}-readline \
+		php${APT_VERSION}-redis \
+		php${APT_VERSION}-soap \
+		php${APT_VERSION}-xmlrpc \
+		php${APT_VERSION}-xml \
+		php${APT_VERSION}-zip \
 	\
 	# Version specific packages \
 	&& case "${PHP_VERSION}" in \
-	5.6|7.0|7.1) \
+        7.4) \
 		apt-get -y install --no-install-recommends \
-			php${PHP_VERSION}-mcrypt \
+			php${APT_VERSION}-geoip \
+                        php${APT_VERSION}-sqlite \
+		;; \
+        8.2) \
+		apt-get -y install --no-install-recommends \
+			php${APT_VERSION}-maxminddb \
+                        php${APT_VERSION}-sqlite3 \
 		;; \
 	esac \
 	\

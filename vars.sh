@@ -1,1 +1,2 @@
-TAG_VERSION=bullseye-2
+TAG_VERSION=bookworm-1
+PHP_VERSIONS="7.4 8.2"
