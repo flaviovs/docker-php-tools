@@ -8,7 +8,7 @@ WORKDIR /var/www
 
 RUN \
 	# Install WPCS \
-	composer global require wp-coding-standards/wpcs --update-no-dev \
+	composer global require wp-coding-standards/wpcs --update-no-dev --no-progress \
 	&& rm -rf $HOME/.composer/cache
 
 USER root

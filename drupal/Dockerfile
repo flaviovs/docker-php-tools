@@ -8,10 +8,10 @@ WORKDIR /var/www
 
 RUN \
 	# Install support files using composer \
-	composer global require --no-update \
+	composer global require --no-update --no-progress \
 		"drupal/coder" \
 		"drush/drush:8.*" \
-	&& composer global update --no-dev --classmap-authoritative \
+	&& composer global update --no-dev --no-progress --classmap-authoritative \
 	&& rm -rf $COMPOSER_HOME/cache \
 	\
 	# Install PAReview.sh \

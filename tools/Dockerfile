@@ -151,12 +151,12 @@ RUN \
         && sudo -u www-data env COMPOSER_HOME=$COMPOSER_HOME \
            composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true \
 	&& sudo -u www-data env COMPOSER_HOME=$COMPOSER_HOME \
-		composer global require --no-update \
+		composer global require --no-update --no-progress \
 			dealerdirect/phpcodesniffer-composer-installer \
 			jakub-onderka/php-parallel-lint \
 			jakub-onderka/php-console-highlighter \
 	&& sudo -u www-data env COMPOSER_HOME=$COMPOSER_HOME \
-		composer global update --no-dev --classmap-authoritative \
+		composer global update --no-dev --no-progress --classmap-authoritative \
 	&& sudo ln -nsf $COMPOSER_HOME/vendor/bin/* /usr/bin \
 	&& rm -rf $COMPOSER_HOME/cache \
 	&& echo 'COMPOSER_CACHE_DIR=$HOME/.composer/cache' >> /etc/skel/.profile \
