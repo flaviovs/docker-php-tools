@@ -13,6 +13,7 @@ for V in $PHP_VERSIONS; do
 
 	echo "Building $TAG"
 	if ! docker build \
+		--progress plain \
 		--build-arg http_proxy \
 		--build-arg no_proxy \
 		--build-arg "TAG_VERSION=$TAG_VERSION" \
