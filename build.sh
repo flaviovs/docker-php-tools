@@ -2,7 +2,7 @@ set -e
 
 . ./vars.sh
 
-: "${COMPOSER_VERSION:=2.1.3}"
+: "${COMPOSER_VERSION:=2.7.2}"
 
 BUILDKIT_PROGRESS=plain
 export BUILDKIT_PROGRESS
