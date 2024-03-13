@@ -146,8 +146,10 @@ RUN \
 		https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar \
 	&& chmod 755 /usr/bin/composer \
 	\
-	# Setup composer \
+        # Setup composer \
 	&& sudo install -d -o www-data -g www-data $COMPOSER_HOME \
+        && sudo -u www-data env COMPOSER_HOME=$COMPOSER_HOME \
+           composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true \
 	&& sudo -u www-data env COMPOSER_HOME=$COMPOSER_HOME \
 		composer global require --no-update \
 			dealerdirect/phpcodesniffer-composer-installer \
